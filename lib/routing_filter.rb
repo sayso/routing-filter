@@ -6,6 +6,7 @@ module RoutingFilter
   autoload :Chain,      'routing_filter/chain'
   autoload :Extension,  'routing_filter/filters/extension'
   autoload :Locale,     'routing_filter/filters/locale'
+  autoload :Language,     'routing_filter/filters/language'
   autoload :Pagination, 'routing_filter/filters/pagination'
   autoload :Uuid,       'routing_filter/filters/uuid'
 
