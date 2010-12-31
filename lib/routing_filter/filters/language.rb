@@ -33,7 +33,7 @@ module RoutingFilter
       end
 
       def languages
-        @@languages ||= I18n.available_locales.map{|l| locale_to_language(l)}
+        @@languages ||= I18n.available_locales.map{|l| l.to_sym}
       end
 
       def languages=(languages)
@@ -44,9 +44,6 @@ module RoutingFilter
         @@languages_pattern ||= %r(^/(#{self.languages.map{|l| Regexp.escape(l.to_s)}.join('|')})(?=/|$))
       end
 
-      def locale_to_language(locale)
-        locale.to_s.split("_").first
-      end
     end
 
     def around_recognize(path, env, &block)
@@ -59,7 +56,7 @@ module RoutingFilter
     def around_generate(*args, &block)
       params = args.extract_options!                              # this is because we might get a call like forum_topics_path(forum, topic, :language => :en)
 
-      language = params.delete(:language)                           # extract the passed :language option
+      language = params[:language]                           # extract the passed :language option
       language = self.class.locale_to_language(I18n.locale) if language.nil?  # default to I18n.locale when language is nil (could also be false)
       language = nil unless valid_language?(language)                   # reset to no language when language is not valid
 
