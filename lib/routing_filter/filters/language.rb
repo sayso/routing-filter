@@ -57,7 +57,8 @@ module RoutingFilter
       params = args.extract_options!                              # this is because we might get a call like forum_topics_path(forum, topic, :language => :en)
 
       language = params[:language]                           # extract the passed :language option
-      language = self.class.locale_to_language(I18n.locale) if language.nil?  # default to I18n.locale when language is nil (could also be false)
+      language = I18n.locale if language.nil?  # default to I18n.locale when language is nil (could also be false)
+      language = I18n.lang_tag(language) if language
       language = nil unless valid_language?(language)                   # reset to no language when language is not valid
 
       args << params
@@ -74,7 +75,7 @@ module RoutingFilter
     end
 
     def default_language?(language)
-      language && language.to_sym == self.class.locale_to_language(I18n.default_locale).to_sym
+      language && language.to_sym == I18n.lang_tag(I18n.default_locale).to_sym
     end
 
     def prepend_language?(language)
