@@ -5,7 +5,7 @@
 #
 #   incoming url: /de/products/page/1
 #   filtered url: /de/products
-#   params:       params[:langauge] = 'de'
+#   params:       params[:language] = 'de'
 #
 # You can install the filter like this:
 #
@@ -32,11 +32,11 @@ module RoutingFilter
         @@include_default_language
       end
 
-      def langauges
+      def languages
         @@languages ||= I18n.available_locales.map{|l| locale_to_language(l)}
       end
 
-      def langauges=(languages)
+      def languages=(languages)
         @@languages = languages.map(&:to_sym)
       end
 
