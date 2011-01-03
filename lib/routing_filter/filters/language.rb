@@ -60,6 +60,8 @@ module RoutingFilter
       language = I18n.locale if language.nil?  # default to I18n.locale when language is nil (could also be false)
       language = I18n.lang_tag(language) if language
       language = nil unless valid_language?(language)                   # reset to no language when language is not valid
+       
+      params.delete(:language) unless Rails.env.test?
 
       args << params
 
