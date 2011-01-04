@@ -61,7 +61,7 @@ module RoutingFilter
       language = I18n.lang_tag(language) if language
       language = nil unless valid_language?(language)                   # reset to no language when language is not valid
        
-      params.delete(:language) unless Rails.env.test?
+      params.delete(:language) unless configatron.prevent_deleting_language_param
 
       args << params
 
