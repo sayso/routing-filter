@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = '[none]'
 
   s.add_dependency 'actionpack'
-
+  s.add_dependency 'configatron'
   s.add_development_dependency 'i18n'
   s.add_development_dependency 'rails'
   s.add_development_dependency 'test_declarative'
