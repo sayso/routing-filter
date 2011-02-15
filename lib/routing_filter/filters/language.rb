@@ -40,8 +40,9 @@ module RoutingFilter
         @@languages = languages.map(&:to_sym)
       end
 
+      #redefine original method to support locales like en-RU etc
       def languages_pattern
-        @@languages_pattern ||= %r(^/(#{self.languages.map{|l| Regexp.escape(l.to_s)}.join('|')})(?=/|$))
+        @@languages_pattern ||= %r(^/(#{self.languages.map{|l| Regexp.escape(l.to_s).sub(/[A-Z]{2}$/,"[A-Z]{2}")}.join('|')})(?=/|$))
       end
 
     end
