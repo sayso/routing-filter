@@ -21,7 +21,7 @@ module RoutingFilter
       def extract_segment!(pattern, path)
         path.sub!(pattern) { $2 || '' }
         path.replace('/') if path.empty?
-        $1
+        $1 || 'en'
       end
 
       def prepend_segment!(result, segment)
